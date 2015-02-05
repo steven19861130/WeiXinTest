@@ -22,7 +22,7 @@ public class OrderDish {
     ResultSet rs = null;
     Connection conn = DBConnection.getConnection();
     try {
-      if (type.equalsIgnoreCase("结束")) {
+      if (type.equalsIgnoreCase("结束结束")) {
         sql = getOrderedDishsSql(userName);
         ps = conn.prepareStatement(sql);
         rs = ps.executeQuery();
@@ -48,6 +48,7 @@ public class OrderDish {
           ps.setInt(3, orderDishes.get(dish));
           ps.setLong(4, Calendar.getInstance().getTimeInMillis());
           ps.executeUpdate();
+          conn.commit();
         }
         
       }
@@ -82,7 +83,7 @@ public class OrderDish {
   }
   
   private String orderDishesSql() {
-    StringBuffer sql = new StringBuffer("insert into disorder values(?,?,?,?)");
+    StringBuffer sql = new StringBuffer("insert into dishorder values(?,?,?,?)");
     return sql.toString();
   }
   

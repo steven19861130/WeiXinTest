@@ -41,7 +41,7 @@ public class TextMessageHandler {
         return "您输入的格式有问题，请按照'我要吃：鱼香肉丝1,青椒肉丝2，番茄鸡蛋汤1'格式发送消息,其中数字代表份数";
       }
       return new OrderDish().order(userName, "我要吃", orderDishes);
-    }else if(msgContent.equalsIgnoreCase("点菜")){
+    }else if(msgContent.equalsIgnoreCase("点菜结束")){
       return new OrderDish().order(userName, "结束", null);
     }
     else{
@@ -75,14 +75,18 @@ public class TextMessageHandler {
   
   private Map<String,Integer> getOrderDishes(String msgContent){
     Map<String,Integer> dishMap = new HashMap<String,Integer>();
-    String dishString = msgContent.substring(msgContent.indexOf("我要吃:"), msgContent.length());
-    String[] dishes = dishString.split(",");
+    String[] dishStrings = msgContent.split("：");
+    String title = dishStrings[0];
+    if(!title.equalsIgnoreCase("我要吃")){
+    	return null;
+    }
+    String[] dishes = dishStrings[1].split("，");
     for(String dish:dishes){
       String dishCount = getCount(dish);
       if(dishCount == null || dishCount.isEmpty()){
         return null;
       }
-      String dishName = dish.substring(1,dish.length()-dish.length());
+      String dishName = dish.substring(0,dish.length()-dishCount.length());
       dishMap.put(dishName, Integer.valueOf(dishCount));
     }
     return dishMap;
