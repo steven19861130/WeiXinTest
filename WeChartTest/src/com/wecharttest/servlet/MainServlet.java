@@ -10,61 +10,66 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import com.wecharttest.handler.MessageHandler;
+import com.wecharttest.controller.MessageController;
 import com.wecharttest.util.SignUtil;
 
 /**
  * Servlet implementation class MainServlet
  */
-@WebServlet(name="MainServlet",urlPatterns={"/MainServlet"})
+@WebServlet(name = "MainServlet", urlPatterns = { "/MainServlet" })
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
-       
-    /**
-     * @see HttpServlet#HttpServlet()
-     */
-    public MainServlet() {
-        super();
-        // TODO Auto-generated constructor stub
-    }
 
 	/**
-	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#HttpServlet()
 	 */
-	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-	  response.setCharacterEncoding("UTF-8");  
-    request.setCharacterEncoding("UTF-8");  
-	  
-	      String signature = request.getParameter("signature");
-        String timestamp = request.getParameter("timestamp");
-        String nonce = request.getParameter("nonce");
-        String echostr = request.getParameter("echostr"); 
-         
-        
-        PrintWriter out = response.getWriter();
-       if(echostr != null && !echostr.isEmpty()){
-        
-        if(SignUtil.checkSignature(signature, timestamp, nonce)){
-           out.print(echostr);
-       }
-      }else{
-        InputStream is = request.getInputStream();  
-        MessageHandler push = new MessageHandler(is);  
-        String getXml = push.parseXml();  
-        System.out.println("getXml:"+getXml);  
-        out.print(getXml);  
-        
-      }
- 
-       out.close();
-       out = null; 
+	public MainServlet() {
+		super();
+		// TODO Auto-generated constructor stub
 	}
 
 	/**
-	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
+	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse
+	 *      response)
 	 */
-	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		doGet(request, response);  
+	protected void doGet(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		response.setCharacterEncoding("UTF-8");
+		request.setCharacterEncoding("UTF-8");
+
+		String signature = request.getParameter("signature");
+		String timestamp = request.getParameter("timestamp");
+		String nonce = request.getParameter("nonce");
+		String echostr = request.getParameter("echostr");
+
+		PrintWriter out = response.getWriter();
+		if (echostr != null && !echostr.isEmpty()) {
+			if (SignUtil.checkSignature(signature, timestamp, nonce)) {
+				out.print(echostr);
+			}
+		} else {
+			try{
+			InputStream is = request.getInputStream();
+			MessageController push = new MessageController(is);
+			String getXml = push.parseXml();
+			System.out.println("getXml:" + getXml);
+			out.print(getXml);
+			}catch(Exception e){
+				e.printStackTrace();
+			}
+		}
+
+		out.close();
+		out = null;
+	}
+
+	/**
+	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse
+	 *      response)
+	 */
+	protected void doPost(HttpServletRequest request,
+			HttpServletResponse response) throws ServletException, IOException {
+		doGet(request, response);
 	}
 
 }
