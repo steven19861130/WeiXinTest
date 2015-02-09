@@ -8,7 +8,7 @@ public class SignUtil {
 	private static String token = "weixintest";
     
     /**
-     * 验证签名
+     * 
      * @param signature
      * @param timestamp
      * @param nonce

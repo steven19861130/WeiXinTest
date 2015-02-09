@@ -17,10 +17,10 @@ public class DBConnection {
     Class.forName("com.mysql.jdbc.Driver");
     conn = DriverManager.getConnection(URL,USER,PASSWORD);
     }catch(SQLException e) {
-    System.out.println("链接数据库发生异常!");
+    System.out.println("DB Connection exception");
     e.printStackTrace();
     }catch(ClassNotFoundException e) {
-      System.out.println("装载驱动包出现异常!请查正！");
+      System.out.println("DB driver exception");
       e.printStackTrace();
       }
     return conn;

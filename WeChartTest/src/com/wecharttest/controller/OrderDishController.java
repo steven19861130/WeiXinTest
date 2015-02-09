@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.wecharttest.bean.DishBean;
-import com.wecharttest.handler.client.GetAllDish;
+import com.wecharttest.handler.client.dish.GetDishHandler;
 import com.wecharttest.util.InstanceUtil;
 
 public class OrderDishController {
@@ -17,7 +17,7 @@ public class OrderDishController {
 	
 	public List<DishBean> getAllDish(){
 		List<DishBean> dbs = new ArrayList<DishBean>();
-		GetAllDish gad = new GetAllDish();
+		GetDishHandler gad = new GetDishHandler();
 		dbs = gad.getAllDish(InstanceUtil.instanceMap.get(weiXinId));
 		return dbs;
 	}
