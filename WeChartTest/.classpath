@@ -13,5 +13,16 @@
 	</classpathentry>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.web.container"/>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jst.j2ee.internal.module.container"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/jaxen-1.1.6.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/jdom-2.0.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/xercesImpl.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/xml-apis.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/commons-beanutils-1.8.3.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/commons-collections.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/commons-lang.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/commons-logging-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/ezmorph-1.0.5.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/json-lib-2.2.2-jdk15.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/morph-sandbox-1.1.1.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>
