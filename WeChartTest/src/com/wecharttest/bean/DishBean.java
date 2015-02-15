@@ -10,6 +10,8 @@ public class DishBean {
 	private int price;
 	
 	private String picture;
+	
+	private int count;
 
 	public String getDishName() {
 		return dishName;
@@ -41,6 +43,14 @@ public class DishBean {
 
 	public void setPicture(String picture) {
 		this.picture = picture;
+	}
+
+	public int getCount() {
+		return count;
+	}
+
+	public void setCount(int count) {
+		this.count = count;
 	}
 
 	

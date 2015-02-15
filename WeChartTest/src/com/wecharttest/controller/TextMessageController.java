@@ -1,16 +1,12 @@
 package com.wecharttest.controller;
 
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
-import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
-import org.jdom2.Document;
-import org.jdom2.Element;
-import org.jdom2.output.XMLOutputter;
+import org.apache.log4j.Logger;
 
 import com.wecharttest.handler.text.MenuCheckHandler;
 import com.wecharttest.handler.text.OrderDishHandler;
@@ -21,6 +17,9 @@ import com.wecharttest.util.*;
 public class TextMessageController {
   
   private ReceiveTextMessage tm;
+  
+  private Logger log = Logger.getLogger(TextMessageController.class);
+
   
   public TextMessageController(ReceiveTextMessage tm){
     this.tm = tm;
@@ -41,6 +40,7 @@ public class TextMessageController {
     }else if(msgContent.startsWith("我要吃")){
       Map<String,Integer> orderDishes = getOrderDishes(msgContent);
       if(orderDishes == null){
+        log.info("User did not order anything");
         return Constants.INPUTERR+Constants.ORDERMSG;
       }
       return new OrderDishHandler().order(userName, "我要吃", orderDishes);
@@ -48,33 +48,11 @@ public class TextMessageController {
       return new OrderDishHandler().order(userName, "点菜结束", null);
     }
     else{
+      log.info("Input invalid");	
       return Constants.INPUTERR;
     }
     
   }
-  
-//  private String strToTextXml(TextMessage tm){
-//    String returnStr = "";  
-//    
-//    SimpleDateFormat format=new SimpleDateFormat("yyyyMMddHHmmss");  
-//    String times = format.format(new Date());  
-//      
-//    Element rootXML = new Element("xml");  
-//      
-//    rootXML.addContent(new Element("ToUserName").setText(tm.getFromUser()));  
-//    rootXML.addContent(new Element("FromUserName").setText(tm.getToUser()));  
-//    rootXML.addContent(new Element("CreateTime").setText(times));  
-//    rootXML.addContent(new Element("MsgType").setText("text"));  
-//    rootXML.addContent(new Element("Content").setText(this.handleContent(tm.getMsgContent(),tm.getFromUser())));  
-//
-//    Document doc = new Document(rootXML);   
-//      
-//    XMLOutputter XMLOut = new XMLOutputter();    
-//    returnStr = XMLOut.outputString(doc);  
-//
-//    return returnStr;  
-//    
-//  }
   
   private Map<String,Integer> getOrderDishes(String msgContent){
     Map<String,Integer> dishMap = new HashMap<String,Integer>();

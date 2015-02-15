@@ -7,13 +7,6 @@ public interface Constants {
   public static String TEXT = "text";
   public static String IMAGE = "image";
   
-  public static enum DishType{
-	  冷菜,
-	  热菜,
-	  汤类,
-	  酒水,
-  }
-  
   
   public static String WELCOMERESUBCRIBEMSG = "欢迎您再次订阅Steven私房菜微信公共平台。\n1.查看菜单请输入<菜单>。 " +
   "\n2.点菜请输入<点菜>。\n3.点菜结束请输入<点菜结束>";

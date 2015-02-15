@@ -6,10 +6,16 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Calendar;
 
+import org.apache.log4j.Logger;
+
+import com.wecharttest.controller.TextMessageController;
 import com.wecharttest.util.*;
 
 public class UserSubscribeHandler {
   
+	private Logger log = Logger.getLogger(UserSubscribeHandler.class);
+	
+	
   public String userSubscribe(String userName){
     boolean isSubscribed;
     String retMsg;

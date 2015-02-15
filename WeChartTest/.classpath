@@ -24,5 +24,6 @@
 	<classpathentry kind="lib" path="WebContent/WEB-INF/ezmorph-1.0.5.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/json-lib-2.2.2-jdk15.jar"/>
 	<classpathentry kind="lib" path="WebContent/WEB-INF/morph-sandbox-1.1.1.jar"/>
+	<classpathentry kind="lib" path="WebContent/WEB-INF/log4j-1.2.17.jar"/>
 	<classpathentry kind="output" path="build/classes"/>
 </classpath>

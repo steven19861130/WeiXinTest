@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.io.InputStream;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
 import org.jdom2.JDOMException;
@@ -18,6 +19,8 @@ public class MessageController {
   private InputStream is;
   
   private String returnStr;
+  
+  private Logger log = Logger.getLogger(MessageController.class);
   
   public MessageController(InputStream is){
     this.is = is;

@@ -3,6 +3,7 @@ package com.wecharttest.controller;
 import java.util.Calendar;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.jdom2.Document;
 import org.jdom2.Element;
 
@@ -18,6 +19,8 @@ public class EventMessageController {
   
   private ReceiveEventMessage em;
   
+  private Logger log = Logger.getLogger(EventMessageController.class);
+  
   public EventMessageController(ReceiveEventMessage em){
     this.em = em;
   }
@@ -29,11 +32,13 @@ public class EventMessageController {
     
     
     if(event.equalsIgnoreCase("subscribe")){
+      log.info("Subscribe event received");
       UserSubscribeHandler ush = new UserSubscribeHandler();
       fromUser = em.getFromUser();
       retMsg = ush.userSubscribe(fromUser);
       return MessageToXMLUtil.strToTextXml(constructTextMessage(retMsg));
     }else if(event.equalsIgnoreCase("unsubscribe")){
+    	log.info("Unsubscribe event received");	
     	UserUnSubscribeHandler uush = new UserUnSubscribeHandler();
     	fromUser = em.getFromUser();
     	retMsg = uush.userUnSubscribe(fromUser);

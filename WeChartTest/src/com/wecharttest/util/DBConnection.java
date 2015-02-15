@@ -3,6 +3,7 @@ package com.wecharttest.util;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class DBConnection {
@@ -38,5 +39,21 @@ public class DBConnection {
       e.printStackTrace();
     }
   }
+  
+  public static void closeConnection(PreparedStatement ps, Connection conn,ResultSet rs){
+	    try {
+	      if(conn != null && !conn.isClosed()){
+	        conn.close();
+	      }
+	      if(ps != null && ps.isClosed()){
+	        ps.close();
+	      }
+	      if(rs != null && rs.isClosed()){
+	    	  rs.close();
+	      }
+	    } catch (SQLException e) {
+	      e.printStackTrace();
+	    }
+	  }
   
 }
