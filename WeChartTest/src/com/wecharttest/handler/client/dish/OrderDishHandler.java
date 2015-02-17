@@ -32,4 +32,12 @@ public class OrderDishHandler {
 		dbs = gdh.getDishes(instance, dishNames.keySet());
 	    return dbs;
 	}
+	
+	public List<DishBean> getAllCheckedDish(String userName){
+		List<DishBean> dbs = new ArrayList<DishBean>();
+		GetDishHandler gdh = new GetDishHandler();
+		Map<String,Integer> dishNames = orderDishDAO.getAllCheckedDish(instance, userName);
+		dbs = gdh.getDishes(instance, dishNames.keySet());
+	    return dbs;
+	}
 }
