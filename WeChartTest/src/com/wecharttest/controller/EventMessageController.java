@@ -13,16 +13,20 @@ import com.wecharttest.message.ReceiveBaseMessage;
 import com.wecharttest.message.ReceiveEventMessage;
 import com.wecharttest.message.ReceiveTextMessage;
 import com.wecharttest.message.ReturnTextMessage;
+import com.wecharttest.util.InstanceUtil;
 import com.wecharttest.util.MessageToXMLUtil;
 
 public class EventMessageController {
   
   private ReceiveEventMessage em;
   
+  private String instance;
+  
   private Logger log = Logger.getLogger(EventMessageController.class);
   
   public EventMessageController(ReceiveEventMessage em){
     this.em = em;
+    instance = InstanceUtil.instanceMap.get(em.getToUser());
   }
   
   public String returnMessage(){
@@ -33,15 +37,15 @@ public class EventMessageController {
     
     if(event.equalsIgnoreCase("subscribe")){
       log.info("Subscribe event received");
-      UserSubscribeHandler ush = new UserSubscribeHandler();
       fromUser = em.getFromUser();
-      retMsg = ush.userSubscribe(fromUser);
+      UserSubscribeHandler ush = new UserSubscribeHandler(instance,fromUser);
+      retMsg = ush.userSubscribe();
       return MessageToXMLUtil.strToTextXml(constructTextMessage(retMsg));
     }else if(event.equalsIgnoreCase("unsubscribe")){
     	log.info("Unsubscribe event received");	
-    	UserUnSubscribeHandler uush = new UserUnSubscribeHandler();
     	fromUser = em.getFromUser();
-    	retMsg = uush.userUnSubscribe(fromUser);
+    	UserUnSubscribeHandler uush = new UserUnSubscribeHandler(instance,fromUser);
+    	retMsg = uush.userUnSubscribe();
     	return MessageToXMLUtil.strToTextXml(constructTextMessage(retMsg));
     }
     

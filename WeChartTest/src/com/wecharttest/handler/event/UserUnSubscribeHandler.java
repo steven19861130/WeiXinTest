@@ -1,33 +1,28 @@
 package com.wecharttest.handler.event;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
+import org.apache.log4j.Logger;
 
-import com.wecharttest.util.DBConnection;
+import com.wecharttest.dao.subscribe.UserUnSubscribeDAO;
 
 public class UserUnSubscribeHandler {
 
-	
-	public String userUnSubscribe(String userName){
-		    String retMsg = "";
-		    
-		    Connection conn = DBConnection.getConnection() ;
-		    PreparedStatement ps;
-		    try {
-				ps = conn.prepareStatement(userUnSubscribeSql());
-				ps.setString(1, userName);
-				ps.executeUpdate();
-			} catch (SQLException e) {
-				e.printStackTrace();
-			}
-		    
-		    return retMsg;
-		    
+	private Logger log = Logger.getLogger(UserUnSubscribeHandler.class);
+
+	private String instance;
+
+	private String userName;
+
+	private UserUnSubscribeDAO uusDAO;
+
+	public UserUnSubscribeHandler(String instance, String userName) {
+		this.instance = instance;
+		this.userName = userName;
+		uusDAO = new UserUnSubscribeDAO();
 	}
-	
-	private String userUnSubscribeSql(){
-		String sql = "update user set Subscribed=false where user_name =?";
-		return sql;
+
+	public String userUnSubscribe() {
+		String retMsg = uusDAO.userUnSubscribe(instance, userName);
+		log.info("User " + userName + " unsubscribe " + instance);
+		return retMsg;
 	}
 }

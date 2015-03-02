@@ -48,7 +48,7 @@ public class GetDishDAO {
 				}
 				rs = ps.executeQuery();		
 			} catch (SQLException e) {
-				log.error("Get one dish db error", e);
+				log.error("Get dish db error", e);
 				e.printStackTrace();
 			}finally{
 				DBConnection.closeConnection(ps,conn,rs);
