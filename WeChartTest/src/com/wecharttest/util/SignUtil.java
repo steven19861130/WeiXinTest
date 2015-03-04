@@ -5,7 +5,7 @@ import java.security.NoSuchAlgorithmException;
 import java.util.Arrays;
 
 public class SignUtil {
-	private static String token = "weixintest";
+	private static String token = "mfyv1";
     
     /**
      * 

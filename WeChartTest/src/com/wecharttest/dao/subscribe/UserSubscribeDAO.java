@@ -51,17 +51,17 @@ public class UserSubscribeDAO {
 		  }
 		  
 		  private String isSubscribedSql(String instance){
-		    String sql = "select * from "+instance+".user where user_name = ?";
+		    String sql = "select * from "+instance+".userinfo where user_name = ?";
 		    return sql;
 		  }
 		  
 		  private String updateSunscribedSql(String instance){
-		    String sql = "update "+instance+".user set subscribed = true, user_last_login = ? where user_name = ?";
+		    String sql = "update "+instance+".userinfo set subscribed = true, user_last_login = ? where user_name = ?";
 		    return sql;
 		  }
 		  
 		  private String insertSunscribedSql(String instance){
-		    String sql = "insert into "+instance+".user values(?,?,true)";
+		    String sql = "insert into "+instance+".userinfo values(?,?,true)";
 		    return sql;
 		  }
 }

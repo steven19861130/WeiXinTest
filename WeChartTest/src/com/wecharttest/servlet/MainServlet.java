@@ -10,7 +10,10 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.log4j.Logger;
+
 import com.wecharttest.controller.MessageController;
+import com.wecharttest.handler.event.UserUnSubscribeHandler;
 import com.wecharttest.util.SignUtil;
 
 /**
@@ -19,6 +22,9 @@ import com.wecharttest.util.SignUtil;
 @WebServlet(name = "MainServlet", urlPatterns = { "/MainServlet" })
 public class MainServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
+	
+	private Logger log = Logger.getLogger(MainServlet.class);
+
 
 	/**
 	 * @see HttpServlet#HttpServlet()
@@ -41,22 +47,29 @@ public class MainServlet extends HttpServlet {
 		String timestamp = request.getParameter("timestamp");
 		String nonce = request.getParameter("nonce");
 		String echostr = request.getParameter("echostr");
-
+        String action = request.getParameter("action");
+		
 		PrintWriter out = response.getWriter();
 		if (echostr != null && !echostr.isEmpty()) {
 			if (SignUtil.checkSignature(signature, timestamp, nonce)) {
 				out.print(echostr);
 			}
-		} else {
+		} else if(action == null || action.isEmpty()){
 			try{
 			InputStream is = request.getInputStream();
 			MessageController push = new MessageController(is);
 			String getXml = push.parseXml();
-			System.out.println("getXml:" + getXml);
+			log.info("getXml:" + getXml);
 			out.print(getXml);
 			}catch(Exception e){
 				e.printStackTrace();
 			}
+			
+			
+		}
+		
+		else{
+			
 		}
 
 		out.close();

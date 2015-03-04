@@ -8,7 +8,7 @@ import com.wecharttest.util.DBConnection;
 
 public class UserUnSubscribeDAO {
 
-	public String userUnSubscribe(String userName, String instance) {
+	public String userUnSubscribe(String instance, String userName) {
 		String retMsg = "";
 
 		Connection conn = DBConnection.getConnection();
@@ -28,7 +28,7 @@ public class UserUnSubscribeDAO {
 	}
 
 	private String userUnSubscribeSql(String instance) {
-		String sql = "update "+instance+".user set Subscribed=false where user_name =?";
+		String sql = "update "+instance+".userinfo set Subscribed=false where user_name =?";
 		return sql;
 	}
 }
